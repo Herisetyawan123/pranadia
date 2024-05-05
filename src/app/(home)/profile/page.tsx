@@ -52,7 +52,7 @@ function Profile() {
           <HiOutlineChevronRight color='#B7B7B7' size={24} />
         </Link>
 
-        <Link href={'/'} className="flex justify-between py-2 items-center px-2 hover:bg-gray-50 rounded-lg">
+        <Link href={'/profile/help-center'} className="flex justify-between py-2 items-center px-2 hover:bg-gray-50 rounded-lg">
           <div className='flex justify-center items-center gap-3'>
             <div className="w-11 h-11 bg-[#FFEBEB] rounded-full"></div>
             <span className='text-sm font-normal'>Help Center</span>

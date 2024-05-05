@@ -12,7 +12,7 @@ function CardPatient() {
   return (
     <main>
       <AppBar menu='Profile'/>
-      <main className="flex flex-col items-center mt-10 relative">
+      <div className="flex flex-col items-center mt-10 relative">
         <Image src={Foto} className='w-28 h-28 object-cover absolute z-20' />
         <div className="bg-[#FFEBEB] px-7 pt-14 pb-20 w-full rounded-xl absolute top-20">
           {/* kartu */}
@@ -48,7 +48,7 @@ function CardPatient() {
               Kembali
           </button>
         </div>
-      </main>
+      </div>
     </main>
   )
 }
