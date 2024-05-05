@@ -11,7 +11,7 @@ function Dokter() {
     <>
         <div className="flex justify-between mt-5">
             <h1 className="font-bold">Dokter Kami</h1>
-            <Link href={'/'} className="text-[#F7490D] font-medium text-sm">Lihat Semua</Link>
+            <Link href={'/promise'} className="text-[#F7490D] font-medium text-sm">Lihat Semua</Link>
         </div>
         <div className="grid grid-cols-2 gap-5 mt-5">
             <CardDokter image={Nindya}>

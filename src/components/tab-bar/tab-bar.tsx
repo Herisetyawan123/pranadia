@@ -10,7 +10,7 @@ const TabBar: React.FC<TabBarProps> = ({ children }) => {
     const [activeTab, setActiveTab] = useState(0);
     return (
         <>
-            <div className='grid grid-cols-2'>
+            <div className={`grid grid-cols-${React.Children.map(children, (child, index) => child)?.length}`}>
                 {React.Children.map(children, (child, index) => {
                     return React.cloneElement(child as React.ReactElement<any>, {
                         isActive: index === activeTab,

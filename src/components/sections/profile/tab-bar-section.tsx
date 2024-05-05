@@ -12,7 +12,7 @@ function TabBarSection() {
             <TabItem title="FAQ">
                 <div className="px-3 py-2">
 
-                    <h2 className='text-xl'>
+                    <h2 className='text-lg mt-5'>
                         We're here to help you with
                         anything and everyting on
                         ViralPitch
