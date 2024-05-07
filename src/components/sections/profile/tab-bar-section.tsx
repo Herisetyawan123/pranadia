@@ -8,7 +8,7 @@ import { HiPlus } from 'react-icons/hi2'
 
 function TabBarSection() {
     return (
-        <TabBar>
+        <TabBar items={2}>
             <TabItem title="FAQ">
                 <div className="px-3 py-2">
 

@@ -16,7 +16,7 @@ const TabItem: React.FC<TabItemProps> = ({ title, isActive, setActiveTab, childr
     };
 
     return (
-        <>
+
             <button
                 className={`${isActive ? 'font-bold border-red-600' : 'font-normal'
                     } py-2 px-4 border-b-4 duration-700 transition-all text-xs`}
@@ -24,7 +24,7 @@ const TabItem: React.FC<TabItemProps> = ({ title, isActive, setActiveTab, childr
             >
                 {title}
             </button>
-        </>
+ 
     );
 };
 

@@ -1,16 +1,19 @@
 "use client";
-import React, { ReactElement, ReactNode, useState } from 'react';
-import TabItem from './tab-item';
+import React, { ReactElement, ReactNode, useRef, useState } from 'react';
 
 interface TabBarProps {
+    items: number;
     children: ReactNode;
 }
 
-const TabBar: React.FC<TabBarProps> = ({ children }) => {
+const TabBar: React.FC<TabBarProps> = ({ items, children }) => {
     const [activeTab, setActiveTab] = useState(0);
+
     return (
         <>
-            <div className={`grid grid-cols-${React.Children.map(children, (child, index) => child)?.length}`}>
+            <div className={`grid`} style={{
+                gridTemplateColumns: `repeat(${items}, minmax(0, 1fr))`,
+            }}>
                 {React.Children.map(children, (child, index) => {
                     return React.cloneElement(child as React.ReactElement<any>, {
                         isActive: index === activeTab,
@@ -19,14 +22,22 @@ const TabBar: React.FC<TabBarProps> = ({ children }) => {
                 })}
             </div>
 
-            <div className='transition-all duration-500'>
+            <div className={`transition-all duration-500 space-x-5`} style={{
+                    width: "100%",
+                    // background: "cadetblue",
+                    display: "-webkit-inline-box",
+                    transform: `translateX(-${activeTab * 106}%)`
+            }}>
                 {
                     React.Children.map(children, (child: ReactNode, index: number) => {
-                        if(index == activeTab){
-                            return <div>{ (child as ReactElement).props.children }</div>
-                        }else{
-                            return null;
-                        }
+                        // if(index == activeTab){
+                            console.log(index);
+                            return (
+                                <div className='transition-all duration-500 w-full'>{ (child as ReactElement).props.children }</div>
+                            );
+                        // }else{
+                        //     return null;
+                        // }
                     })
                 }
             </div>
