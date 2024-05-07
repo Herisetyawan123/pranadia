@@ -16,7 +16,7 @@ function Poliklinik() {
       </div>
 
       <div className="grid grid-cols-2 gap-2 mt-5">
-        <div className="bg-white border px-2 py-2 rounded-md flex divide-x">
+        <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
           <div className="w-[40%] flex justify-center items-center">
             <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
               <Heart />
@@ -25,9 +25,9 @@ function Poliklinik() {
           <div className="px-2 w-[60%] flex justify-center items-center">
             <p className="text-[10px] font-medium text-[#505050]">Poliklinik Jantung</p>
           </div>
-        </div>
+        </Link>
 
-        <div className="bg-white border px-2 py-2 rounded-md flex divide-x">
+        <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
           <div className="w-[40%] flex justify-center items-center">
             <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
               <Emphatize />
@@ -36,9 +36,9 @@ function Poliklinik() {
           <div className="px-2 w-[60%] flex justify-center items-center">
             <p className="text-[10px] font-medium text-[#505050]">Poliklinik Penyakit Dalam</p>
           </div>
-        </div>
+        </Link>
 
-        <div className="bg-white border px-2 py-2 rounded-md flex divide-x">
+        <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
           <div className="w-[40%] flex justify-center items-center">
             <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
               <Lungs />
@@ -47,9 +47,9 @@ function Poliklinik() {
           <div className="px-2 w-[60%] flex justify-center items-center">
             <p className="text-[10px] font-medium text-[#505050]">Poliklinik Paru</p>
           </div>
-        </div>
+        </Link>
 
-        <div className="bg-white border px-2 py-2 rounded-md flex divide-x">
+        <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
           <div className="w-[40%] flex justify-center items-center">
             <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
               <Tooth />
@@ -58,9 +58,9 @@ function Poliklinik() {
           <div className="px-2 w-[60%] flex justify-center items-center">
             <p className="text-[10px] font-medium text-[#505050]">Poliklinik Gigi & Mulut</p>
           </div>
-        </div>
+        </Link>
 
-        <div className="bg-white border px-2 py-2 rounded-md flex divide-x">
+        <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
           <div className="w-[40%] flex justify-center items-center">
             <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
               <Stethoscope />
@@ -69,9 +69,9 @@ function Poliklinik() {
           <div className="px-2 w-[60%] flex justify-center items-center">
             <p className="text-[10px] font-medium text-[#505050]">Poliklinik Umum</p>
           </div>
-        </div>
+        </Link>
 
-        <div className="bg-white border px-2 py-2 rounded-md flex divide-x">
+        <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
           <div className="w-[40%] flex justify-center items-center">
             <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
               <Hospital />
@@ -80,7 +80,7 @@ function Poliklinik() {
           <div className="px-2 w-[60%] flex justify-center items-center">
             <p className="text-[10px] font-medium text-[#505050]">Instalasi Gawat Darurat</p>
           </div>
-        </div>
+        </Link>
 
       </div>
     </>
