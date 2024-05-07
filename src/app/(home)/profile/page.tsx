@@ -10,7 +10,7 @@ function Profile() {
 
   return (
     <main>
-      <AppBar menu='Profile'/>
+      <AppBar menu='Profile' notif={true}/>
       <Header />
       <div className="relative bg-[#FAFAFA] mx-5 mt-5 rounded-3xl overflow-hidden h-20">
         <div className='absolute px-4 py-2 w-full mt-5 rounded-3xl overflow-hidden grid grid-cols-2 divide-x'>
