@@ -2,16 +2,18 @@ import Link from "next/link";
 import React from "react";
 
 function BoxLiterasiArtikel({
+  id,
   src,
   title,
   category,
 }: {
+  id: number;
   src: string;
   title: string;
   category: string;
 }) {
   return (
-    <Link href={"/"}>
+    <Link href={"/articels/" + id}>
       <div
         className="bg-blue-500 rounded-lg h-52 flex relative overflow-hidden"
         style={{

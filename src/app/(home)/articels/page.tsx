@@ -40,6 +40,7 @@ function page() {
           {articels.map((articel, index) => (
             <BoxLiterasiArtikel
               key={index}
+              id={index + 1}
               src={articel.thumbnail}
               title={articel.title}
               category={articel.category}
