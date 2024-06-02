@@ -64,7 +64,7 @@ function ButtomNavigation() {
       </Link>
 
       <Link
-        href={"/promise"}
+        href={"/dokter"}
         className="flex justify-center items-center flex-col"
       >
         <div className="w-12 h-12 bg-red-700 rounded-full flex justify-center items-center">

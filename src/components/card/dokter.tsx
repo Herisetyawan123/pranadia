@@ -10,7 +10,7 @@ type Props = {
 function CardDokter({ image, children, id }: Props) {
   return (
     <Link
-      href={"/promise/" + id}
+      href={"/dokter/" + id}
       className="bg-white p-4 rounded-lg flex flex-col justify-start items-center"
       style={{
         boxShadow: "0px 3.57px 35.74px 0px rgba(230, 233, 238, 1)",

@@ -12,7 +12,7 @@ function Dokter() {
     <>
       <div className="flex justify-between mt-5">
         <h1 className="font-bold">Dokter Kami</h1>
-        <Link href={"/promise"} className="text-[#F7490D] font-medium text-sm">
+        <Link href={"/dokter"} className="text-[#F7490D] font-medium text-sm">
           Lihat Semua
         </Link>
       </div>

@@ -39,8 +39,8 @@ function page() {
       // membuat variable state loadingan menjadi false yang berarti loading berhenti
       setLoading(false);
     } catch (error) {
-      // jika ada error maka akan dikembalikan ke halaman sebelumnya alias halaman promise
-      redirect("/promise");
+      // jika ada error maka akan dikembalikan ke halaman sebelumnya alias halaman dokter
+      redirect("/dokter");
     }
   }, []);
 
