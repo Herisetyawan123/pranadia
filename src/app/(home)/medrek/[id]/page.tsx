@@ -120,24 +120,6 @@ function Page() {
                   <span className="text-xs text-red-600">Dokter Umum</span>
                 </div>
               </div>
-
-              {/* dokter yang ada */}
-              <div className="flex gap-2 items-center">
-                <div className="w-16 h-16 relative rounded-full overflow-hidden">
-                  <Image
-                    src={"/dokter/dinar.png"}
-                    layout="fill"
-                    className="w-16 h-16"
-                    objectFit="cover"
-                  />
-                </div>
-                <div className="flex flex-col justify-center-center gap-1">
-                  <h1 className="text-xs font-semibold">
-                    dr. Dinar Agustina L
-                  </h1>
-                  <span className="text-xs text-red-600">Dokter Umum</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -149,6 +131,7 @@ function Page() {
           Buat Jadwal
         </Link>
       </div>
+      <div className="h-10"></div>
     </main>
   );
 }
