@@ -5,3 +5,11 @@ interface DokterInterface {
   description: string;
   nostr: string;
 }
+
+type ArticelInterface = {
+  thumbnail: string;
+  category: string;
+  title: string;
+  date: string;
+  description: string;
+};

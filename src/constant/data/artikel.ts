@@ -1,11 +1,3 @@
-type ArticelInterface = {
-  thumbnail: string;
-  category: string;
-  title: string;
-  date: string;
-  description: string;
-};
-
 const articels: ArticelInterface[] = [
   {
     category: "Kesehatan",
