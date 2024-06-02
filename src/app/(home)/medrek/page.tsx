@@ -27,7 +27,7 @@ function Medrek() {
 
       <div className="px-6 mt-3">
         <div className="grid grid-cols-2 gap-2 mt-5">
-          <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
+          <Link href={'/medrek/1'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
             <div className="w-[40%] flex justify-center items-center">
               <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                 <Heart />
@@ -38,7 +38,7 @@ function Medrek() {
             </div>
           </Link>
 
-          <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
+          <Link href={'/medrek/1'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
             <div className="w-[40%] flex justify-center items-center">
               <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                 <Emphatize />
@@ -49,7 +49,7 @@ function Medrek() {
             </div>
           </Link>
 
-          <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
+          <Link href={'/medrek/1'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
             <div className="w-[40%] flex justify-center items-center">
               <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                 <Lungs />
@@ -60,7 +60,7 @@ function Medrek() {
             </div>
           </Link>
 
-          <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
+          <Link href={'/medrek/1'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
             <div className="w-[40%] flex justify-center items-center">
               <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                 <Tooth />
@@ -71,7 +71,7 @@ function Medrek() {
             </div>
           </Link>
 
-          <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
+          <Link href={'/medrek/1'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
             <div className="w-[40%] flex justify-center items-center">
               <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                 <Stethoscope />
@@ -82,7 +82,7 @@ function Medrek() {
             </div>
           </Link>
 
-          <Link href={'/'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
+          <Link href={'/medrek/1'} className="bg-white border px-2 py-2 rounded-md flex divide-x">
             <div className="w-[40%] flex justify-center items-center">
               <div className="bg-[#FFF1F1] w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                 <Hospital />

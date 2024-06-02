@@ -3,9 +3,9 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
 const inter = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -20,12 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <main className="bg-gray-200 flex justify-center">
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <div className="bg-gray-200 flex justify-center">
           <div className="w-screen sm:w-[360px] bg-white h-screen overflow-auto relative">
             {children}
           </div>
-        </main>
+        </div>
       </body>
     </html>
   );
