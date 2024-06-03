@@ -162,7 +162,7 @@ function page() {
       {/* end box jadwal */}
 
       <Link
-        href={"/"}
+        href={"/buat-janji"}
         className="bg-red-600 text-white font-bold text-lg mt-10 rounded-full px-10 py-3 block mx-5 text-center"
       >
         Buat Jadwal
