@@ -36,6 +36,7 @@ function InputDate() {
         type="date"
         defaultValue={formatDate(weekdays[select].date)}
         className="hidden"
+        name="date"
       />
       <div className="w-full overflow-x-scroll flex gap-2">
         {weekdays.map((day, index) => (
