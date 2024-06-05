@@ -1,6 +1,6 @@
-import ButtomNavigation from '@/components/buttom-navigation';
-import Link from 'next/link';
-import React from 'react'
+import ButtomNavigation from "@/components/buttom-navigation";
+import Link from "next/link";
+import React from "react";
 
 function Layout({
   children,
@@ -10,10 +10,10 @@ function Layout({
   return (
     <>
       {children}
-      <div className="h-16"></div>
-      <ButtomNavigation/>
+      {/* <div className="h-16"></div> */}
+      <ButtomNavigation />
     </>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
