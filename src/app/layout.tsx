@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
         <div className="bg-gray-200 flex justify-center">
-          <div className="w-screen sm:w-[360px] bg-white h-screen overflow-auto relative">
+          <div className="w-screen sm:w-[360px] bg-white h-screen overflow-auto relative overflow-x-hidden">
             {children}
           </div>
         </div>
