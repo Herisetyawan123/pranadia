@@ -15,7 +15,7 @@ type Props = {
 function InputSelect({ label, name, id, options }: Props) {
   return (
     <div className="flex flex-col w-full gap-2">
-      <label htmlFor="">{label}</label>
+      <label className="text-sm font-medium">{label}</label>
       <select
         name={name}
         id={id}
