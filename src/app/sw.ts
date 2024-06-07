@@ -31,7 +31,7 @@ installSerwist({
       },
     ],
   },
-  importScripts: ["custom-sw.js"],
+  // importScripts: ["custom-sw.js"],
 });
 
 // serwist.addEventListeners();
