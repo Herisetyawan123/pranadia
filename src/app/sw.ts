@@ -13,7 +13,7 @@ declare global {
 declare const self: ServiceWorkerGlobalScope;
 const revision = crypto.randomUUID();
 
-const serwist = new Serwist({
+installSerwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
   clientsClaim: true,
@@ -24,7 +24,7 @@ const serwist = new Serwist({
     entries: [
       {
         url: "/offline",
-        // revision: revision,
+        revision: revision,
         matcher({ request }) {
           return request.destination === "document";
         },
@@ -34,4 +34,4 @@ const serwist = new Serwist({
   importScripts: ["custom-sw.js"],
 });
 
-serwist.addEventListeners();
+// serwist.addEventListeners();
