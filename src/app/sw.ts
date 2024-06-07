@@ -2,6 +2,7 @@
 import { defaultCache } from "@serwist/next/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
 import { Serwist } from "serwist";
+import { installSerwist } from "@serwist/sw";
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -10,17 +11,20 @@ declare global {
 }
 
 declare const self: ServiceWorkerGlobalScope;
+const revision = crypto.randomUUID();
 
-const serwist = new Serwist({
+installSerwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: defaultCache,
+  offlineAnalyticsConfig: true,
   fallbacks: {
     entries: [
       {
         url: "/offline", // the page that'll display if user goes offline
+        revision: revision,
         matcher({ request }) {
           return request.destination === "document";
         },
@@ -30,4 +34,4 @@ const serwist = new Serwist({
   importScripts: ["custom-sw.js"],
 });
 
-serwist.addEventListeners();
+// serwist.addEventListeners();
