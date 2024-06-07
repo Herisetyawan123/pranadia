@@ -27,6 +27,7 @@ const serwist = new Serwist({
       },
     ],
   },
+  importScripts: ["custom-sw.js"],
 });
 
 serwist.addEventListeners();

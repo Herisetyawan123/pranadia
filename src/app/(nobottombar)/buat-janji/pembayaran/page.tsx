@@ -1,6 +1,7 @@
 "use client";
 import AppBarBack from "@/components/appbar/appbar";
 import InputSelect from "@/components/input/input-select";
+import ModalPembayaran from "@/components/modal/pembayaran";
 import useCreatePromise from "@/store/use-create-promise";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
@@ -121,6 +122,10 @@ function page() {
           </button>
         </div>
       </div>
+
+      <ModalPembayaran title="Pembayaran" isOpen={true} onToggle={() => {}}>
+        <h1>Hallo</h1>
+      </ModalPembayaran>
     </main>
   );
 }
