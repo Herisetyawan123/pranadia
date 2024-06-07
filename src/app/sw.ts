@@ -13,7 +13,7 @@ declare global {
 declare const self: ServiceWorkerGlobalScope;
 const revision = crypto.randomUUID();
 
-installSerwist({
+const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
   clientsClaim: true,
@@ -23,8 +23,8 @@ installSerwist({
   fallbacks: {
     entries: [
       {
-        url: "/offline", // the page that'll display if user goes offline
-        revision: revision,
+        url: "/offline",
+        // revision: revision,
         matcher({ request }) {
           return request.destination === "document";
         },
@@ -34,4 +34,4 @@ installSerwist({
   importScripts: ["custom-sw.js"],
 });
 
-// serwist.addEventListeners();
+serwist.addEventListeners();
