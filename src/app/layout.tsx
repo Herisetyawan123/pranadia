@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import SessionWrapper from "@/components/session-wrapper";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -23,7 +25,8 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning={true}>
         <div className="bg-gray-200 flex justify-center">
           <div className="w-screen sm:w-[360px] bg-white h-screen overflow-auto relative overflow-x-hidden">
-            {children}
+            {/* <SessionProvider>{children}</SessionProvider> */}
+            <SessionWrapper>{children}</SessionWrapper>
           </div>
         </div>
       </body>

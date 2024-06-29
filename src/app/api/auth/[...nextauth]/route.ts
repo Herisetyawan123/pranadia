@@ -1,0 +1,64 @@
+import NextAuth, { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/login",
+  },
+  providers: [
+    CredentialsProvider({
+      name: "Email and Password",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "Your Email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: credentials?.email,
+            password: credentials?.password,
+          }),
+        };
+        try {
+          // console.log(options)
+          const response = await fetch(
+            "http://127.0.0.1:8000/api/login",
+            options
+          );
+
+          const res = await response.json();
+
+          if (response.ok) {
+            return res.user;
+          } else {
+            throw "Unauthorized";
+          }
+        } catch (error) {
+          console.log("Error", error);
+        }
+
+        return null;
+      },
+    }),
+  ],
+  callbacks: {
+    async jwt({ token, account, user }) {
+      if (user) {
+        token.user = user;
+        token.accessToken = user.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.accessToken = token.access_token;
+      session.user = token.user;
+      return session;
+    },
+  },
+};
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
