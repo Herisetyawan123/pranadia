@@ -1,14 +1,79 @@
+"use client";
 import AppBarBack from "@/components/appbar/appbar";
 import InputGroup from "@/components/input/input-group";
 import InputSelect from "@/components/input/input-select";
+import { getSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { FormEvent, useState } from "react";
 
 function Page() {
+  const router = useRouter();
+  const [form, setForm] = useState({
+    nama_lengkap: "",
+    status: "Kawin",
+    tempat_lahir: "Sumedang",
+    tanggal_lahir: "",
+    jenis_kelamin: "Pria",
+    provinsi: "Jawa Barat",
+    kabupaten: "Sumedang",
+    kecamatan: "Sumedang Utara",
+    kelurahan: "Situ",
+    hubungan_keluarga: "Anak",
+  });
+
+  function hasEmptyValue(obj: Object) {
+    for (const [key, value] of Object.entries(obj)) {
+      if (value === "") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!hasEmptyValue(form)) {
+      try {
+        await addFamily(form);
+        alert("succes menambah data");
+        router.back();
+      } catch (error) {
+        alert("gagal menambah data");
+      }
+    } else {
+      alert("Harap isi semua field");
+    }
+  };
+
+  const addFamily = async (form: Object) => {
+    const family = {
+      nama_lengkap: "John Doe",
+      status: "Single",
+      tempat_lahir: "Jakarta",
+      tanggal_lahir: "2000-01-01",
+      jenis_kelamin: "laki-laki",
+      provinsi: "DKI Jakarta",
+      kabupaten: "Jakarta Selatan",
+      kecamatan: "Kebayoran Baru",
+      kelurahan: "Gunung",
+      hubungan_keluarga: "Anak",
+    };
+    const session = await getSession();
+    // console.log(session?.user.access_token);
+    const response = await fetch("http://127.0.0.1:8000/api/anggota", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + session?.user.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+  };
   return (
     <main className="pb-20">
       <AppBarBack menu="Tambah Anggota Keluarga" />
-      <div className="mx-6 mt-5">
+      <form onSubmit={handleSubmit} className="mx-6 mt-5">
         <div className="mb-5">
           <InputGroup
             id="name"
@@ -16,6 +81,12 @@ function Page() {
             label="Nama Lengkap (Sesuai KTP)"
             type="text"
             placeholder="Gia L Ayura"
+            onChange={(e) => {
+              setForm({
+                ...form,
+                nama_lengkap: e.target.value,
+              });
+            }}
           />
           <span className="text-gray-400 text-xs mt-2 block">
             *akan ditampilkan pada hasil pemeriksaan
@@ -37,6 +108,12 @@ function Page() {
                 label: "Kawin",
               },
             ]}
+            onChange={(e) => {
+              setForm({
+                ...form,
+                status: e.target.value,
+              });
+            }}
           />
         </div>
 
@@ -47,6 +124,12 @@ function Page() {
             label="Tempat Lahir"
             type="text"
             placeholder="Sumedang"
+            onChange={(e) => {
+              setForm({
+                ...form,
+                tempat_lahir: e.target.value,
+              });
+            }}
           />
         </div>
 
@@ -57,19 +140,36 @@ function Page() {
             label="Jenis Kelamin"
             options={[
               {
-                value: "Pria",
+                value: "laki-laki",
                 label: "Pria",
               },
               {
-                value: "Perempuan",
+                value: "perempuan",
                 label: "Perempuan",
               },
             ]}
+            onChange={(e) => {
+              setForm({
+                ...form,
+                jenis_kelamin: e.target.value,
+              });
+            }}
           />
         </div>
 
         <div className="mb-5">
-          <InputGroup id="tgl" name="tgl" label="Tanggal Lahir" type="date" />
+          <InputGroup
+            id="tgl"
+            name="tgl"
+            label="Tanggal Lahir"
+            type="date"
+            onChange={(e) => {
+              setForm({
+                ...form,
+                tanggal_lahir: e.target.value,
+              });
+            }}
+          />
           <span className="text-gray-400 text-xs mt-2 block">
             *tanggal-bulan-tahun (10-10-2023)
           </span>
@@ -81,6 +181,12 @@ function Page() {
             name="provinsi"
             id="provinsi"
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
+            onChange={(e) => {
+              setForm({
+                ...form,
+                provinsi: e.target.value,
+              });
+            }}
           >
             <option value="Jawa Barat">Jawa Barat</option>
             <option value="Jawa Tengah">Jawa Tengah</option>
@@ -94,6 +200,12 @@ function Page() {
             name="kabupaten"
             id="kabupaten"
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
+            onChange={(e) => {
+              setForm({
+                ...form,
+                kabupaten: e.target.value,
+              });
+            }}
           >
             <option value="Sumedang">Sumedang</option>
             <option value="Cirebon">Cirebon</option>
@@ -107,6 +219,12 @@ function Page() {
             name="kecamatan"
             id="kecamatan"
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
+            onChange={(e) => {
+              setForm({
+                ...form,
+                kecamatan: e.target.value,
+              });
+            }}
           >
             <option value="Sumedang Utara">Sumedang Utara</option>
             <option value="Sumedang Selatan">Sumedang Selatan</option>
@@ -120,6 +238,12 @@ function Page() {
             name="Kelurahan"
             id="Kelurahan"
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
+            onChange={(e) => {
+              setForm({
+                ...form,
+                kelurahan: e.target.value,
+              });
+            }}
           >
             <option value="Situ">Situ</option>
             <option value="Curah Takir">Curah Takir</option>
@@ -162,12 +286,17 @@ function Page() {
                 label: "Nenek",
               },
             ]}
+            onChange={(e) => {
+              setForm({
+                ...form,
+                hubungan_keluarga: e.target.value,
+              });
+            }}
           />
         </div>
 
         <div className="mb-5">
-          <Link
-            href={"/profile/anggota-keluarga"}
+          <button
             className="px-6 py-4 mx-auto rounded-full block text-center text-white font-semibold w-full hover:scale-105 duration-300"
             style={{
               background:
@@ -175,7 +304,7 @@ function Page() {
             }}
           >
             Simpan Anggota Keluarga
-          </Link>
+          </button>
         </div>
 
         <div className="mb-5">
@@ -186,7 +315,7 @@ function Page() {
             Batalkan
           </Link>
         </div>
-      </div>
+      </form>
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 
 type InputProps = {
   id?: string;
@@ -8,6 +8,7 @@ type InputProps = {
   type: string;
   value?: string;
   disable?: boolean;
+  onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
 function InputGroup({
@@ -18,6 +19,7 @@ function InputGroup({
   type,
   value,
   disable,
+  onChange,
 }: InputProps) {
   return (
     <div className="flex flex-col gap-2">
@@ -31,6 +33,7 @@ function InputGroup({
         className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
         placeholder={placeholder}
         disabled={disable}
+        onChange={onChange}
       />
     </div>
   );
