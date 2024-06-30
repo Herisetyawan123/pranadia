@@ -1,14 +1,28 @@
-import AppBar from "@/components/appbar/appbar";
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
+import { Session } from "next-auth";
 import Image from "next/legacy/image";
+import AppBar from "@/components/appbar/appbar";
 import Link from "next/link";
 import Foto from "@/assets/profile/foto.png";
 import Right from "@/assets/profile/kartu-right.png";
 import Prandia from "@/assets/prandia-logo.png";
+
 import QRCode from "@/assets/profile/qr-code.png";
 import ButtonPrimary from "@/components/button/btn-primary";
 
 function CardPatient() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  const loadSession = async () => {
+    const session = await getSession();
+    setSession(session);
+  };
+
+  useEffect(() => {
+    loadSession();
+  }, []);
   return (
     <main className="pb-16">
       <AppBar menu="Profile" />
@@ -28,13 +42,16 @@ function CardPatient() {
             <div className="mx-6 mt-5 flex gap-3">
               <Image src={QRCode} />
               <div className="flex flex-col items-start w-full gap-1">
-                <h3 className="font-semibold text-xs">Hadi Akbar</h3>
+                <h3 className="font-semibold text-xs">
+                  {session?.user.user.name}
+                </h3>
                 <span className="font-semibold text-[7px]">
-                  Laki - Laki (1993-04-01)
+                  {session?.user.user.jenis_kelamin} (
+                  {session?.user.user.tgl_lahir})
                 </span>
                 <p className="font-normal text-[7px] w-2/3">
-                  Perum Putra Citra Lestari No. C2 Kel. Situ, Kec. Sumedang
-                  Utara, Kab. Sumedang
+                  {session?.user.user.kelurahan} {session?.user.user.kecamatan}{" "}
+                  {session?.user.user.kabupaten}
                 </p>
               </div>
             </div>
