@@ -3,21 +3,86 @@ import AppBarBack from "@/components/appbar/appbar";
 import InputSelect from "@/components/input/input-select";
 import ModalPembayaran from "@/components/modal/pembayaran";
 import useCreatePromise from "@/store/use-create-promise";
+import { getSession, useSession } from "next-auth/react";
 import Image from "next/legacy/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function page() {
-  // const router = useRouter();
-  // const { promise } = useCreatePromise();
+  const router = useRouter();
+  const { promise } = useCreatePromise();
+  const [form, setForm] = useState({});
+  const [modal, setModal] = useState(false);
+  const [add, setAdd] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(promise);
-  // }, []);
+  useEffect(() => {
+    // render midtrans snap token
+    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
 
-  // if (!promise) {
-  //   router.back();
-  // }
+    const script = document.createElement("script");
+    script.src = snapScript;
+    script.setAttribute("data-client-key", "SB-Mid-client-s2Pf3wXHCOjFcGT4");
+    script.async = true;
+
+    document.body.appendChild(script);
+    console.log(document.body);
+
+    if (promise) {
+      const booking = {
+        layanan: promise?.poli,
+        no_medrek: "123456",
+        tgl_booking: "2024-07-01",
+        dokter: promise?.docter.name,
+        start_time: "2024-07-01 09:00:00",
+        end_time: "2024-07-01 09:30:00",
+        biaya_layanan: promise?.administrasi,
+        biaya_admin: promise?.layanan,
+      };
+      setForm(booking);
+    }
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const onPay = async () => {
+    if (!add) {
+      setModal((prev) => !prev);
+      const session = await getSession();
+      try {
+        const response = await fetch("http://localhost:8000/api/bookings", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + session?.user.access_token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+
+        const res = await response.json();
+        if (response.ok) {
+          console.log("payme", res);
+          window.snap.show();
+          window.snap.pay(res.snapToken, {
+            // embedId: "snap-container",
+            onSuccess: function (result: any) {
+              console.log("success", result);
+            },
+            onPending: function (result: any) {
+              console.log("pending", result);
+            },
+            onClose: function () {},
+          });
+        }
+      } catch (error) {}
+      setAdd(true);
+    }
+  };
+
+  if (!promise) {
+    router.replace("/buat-janji");
+  }
 
   return (
     <main>
@@ -107,7 +172,7 @@ function page() {
           </div>
           <div className="flex justify-between">
             <p>Biaya Administrasi</p>
-            <p>Rp. 50.000</p>
+            <p>Rp. {promise?.administrasi}</p>
           </div>
         </div>
 
@@ -117,15 +182,33 @@ function page() {
         </div>
 
         <div className="w-full">
-          <button className="w-full bg-red-600 py-4 rounded-full text-white font-bold text-base">
+          <button
+            onClick={onPay}
+            className={`block text-center w-full ${
+              add ? "bg-red-300 py-4" : "bg-red-600 py-4"
+            }  rounded-full text-white font-bold text-base ${
+              add ? "cursor-not-allowed" : ""
+            }`}
+          >
             Bayar
           </button>
+          <Link
+            href={"/history"}
+            className={`mt-5 block text-center w-full border border-red-600 text-red-600 py-4 rounded-full bg-white font-bold text-base`}
+          >
+            Back
+          </Link>
         </div>
       </div>
+      <div id="snap-container" className="relative w-full"></div>
 
-      <ModalPembayaran title="Pembayaran" isOpen={true} onToggle={() => {}}>
-        <h1>Hallo</h1>
-      </ModalPembayaran>
+      {/* <ModalPembayaran
+        title="Pembayaran"
+        isOpen={modal}
+        onToggle={() => setModal((prev) => !prev)}
+      >
+
+      </ModalPembayaran> */}
     </main>
   );
 }

@@ -22,5 +22,6 @@ export const config = {
     "/history/:path*",
     "/profile/:path*",
     "/articles/:path*",
+    "/buat-janji/:path*",
   ],
 };

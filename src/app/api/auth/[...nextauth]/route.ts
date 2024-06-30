@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           const res = await response.json();
 
           if (response.ok) {
-            return res.user;
+            return res;
           } else {
             throw "Unauthorized";
           }

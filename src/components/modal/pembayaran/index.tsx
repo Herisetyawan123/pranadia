@@ -21,11 +21,7 @@ function ModalPembayaran({
         transformOrigin: "bottom",
       }}
     >
-      <div
-        className={`bg-white rounded-lg shadow-lg relative w-screen sm:w-[360px] transition-all duration-500`}
-      >
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
