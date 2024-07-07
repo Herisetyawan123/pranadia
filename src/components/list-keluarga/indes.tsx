@@ -8,7 +8,7 @@ function ListKeluarga() {
   const loadData = async () => {
     const session = await getSession();
     // console.log(session?.user.access_token);
-    const response = await fetch("http://127.0.0.1:8000/api/anggota", {
+    const response = await fetch(process.env.NEXT_PUBLIC_URL_API + "/anggota", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + session?.user.access_token,

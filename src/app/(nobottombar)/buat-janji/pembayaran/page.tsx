@@ -51,14 +51,17 @@ function page() {
       setModal((prev) => !prev);
       const session = await getSession();
       try {
-        const response = await fetch("http://localhost:8000/api/bookings", {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + session?.user.access_token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        });
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_URL_API + "/bookings",
+          {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + session?.user.access_token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+          }
+        );
 
         const res = await response.json();
         if (response.ok) {

@@ -26,7 +26,7 @@ const authOptions: NextAuthOptions = {
         try {
           // console.log(options)
           const response = await fetch(
-            "http://127.0.0.1:8000/api/login",
+            process.env.NEXT_PUBLIC_URL_API + "/login",
             options
           );
 
