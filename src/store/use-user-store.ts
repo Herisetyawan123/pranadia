@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface User {
+export interface User {
   name: string;
   email: string;
   tgl_lahir: string;
@@ -47,7 +47,7 @@ const initialUser: User = {
   kabupaten: "",
   kecamatan: "",
   kelurahan: "",
-  foto_ktp: "",
+  foto_ktp: "photo.jpg",
   no_ktp: "",
   pekerjaan: "",
   pendidikan: "",

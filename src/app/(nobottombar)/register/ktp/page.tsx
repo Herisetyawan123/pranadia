@@ -15,7 +15,7 @@ function DataKtp() {
       pekerjaan: user.pekerjaan ? user.pekerjaan : "Dokter",
       pendidikan: user.pendidikan ? user.pendidikan : "S2",
       agama: user.agama ? user.agama : "Islam",
-      pelayanan: user.pelayanan ? user.pelayanan : "Tidak",
+      pelayanan: user.pelayanan ? user.pelayanan : "belum",
     });
   }, []);
 
@@ -137,8 +137,8 @@ function DataKtp() {
             }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
-            <option value="Tidak">Tidak</option>
-            <option value="Iya">Iya</option>
+            <option value="belum">Tidak</option>
+            <option value="sudah">Iya</option>
           </select>
         </div>
 

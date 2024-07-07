@@ -14,7 +14,7 @@ function DataUmum() {
     setUser({
       title_pasien: user.title_pasien ? user.title_pasien : "nn",
       status_kawin: user.status_kawin ? user.status_kawin : "belum",
-      jenis_kelamin: user.jenis_kelamin ? user.jenis_kelamin : "Perempuan",
+      jenis_kelamin: user.jenis_kelamin ? user.jenis_kelamin : "perempuan",
     });
   }, []);
 
@@ -108,8 +108,8 @@ function DataUmum() {
             }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
-            <option value="Perempuan">Perempuan</option>
-            <option value="Laki Laki">Laki Laki</option>
+            <option value="perempuan">Perempuan</option>
+            <option value="laki">Laki Laki</option>
           </select>
         </div>
         <InputGroup

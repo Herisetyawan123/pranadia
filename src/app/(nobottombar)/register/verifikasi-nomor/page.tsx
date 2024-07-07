@@ -1,18 +1,61 @@
 "use client";
 import AppBarRegister from "@/components/appbar/register";
-import ButtonPrimary from "@/components/button/btn-primary";
-import InputGroup from "@/components/input/input-group";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import Pranadia from "@/assets/prandia-logo.png";
 import Image from "next/legacy/image";
 import CountDown from "./(component)/count-down";
+import useUserStore, { User } from "@/store/use-user-store";
 
 function VErifikasiDarurat() {
   const router = useRouter();
+  const { user, setUser } = useUserStore();
+
+  const isEmptyValue = (value: any) => {
+    return (
+      value === null ||
+      value === undefined ||
+      value === "" ||
+      (typeof value === "object" && Object.keys(value).length === 0)
+    );
+  };
+
+  const hasEmptyValue = (obj: Object) => {
+    return Object.values(obj).some(isEmptyValue);
+  };
+
+  const registerData = async (user: User) => {
+    const response = await fetch(process.env.NEXT_PUBLIC_URL_API + "register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    if (response.ok) {
+      router.replace("/login");
+    } else {
+      alert("terjadi kesalahan");
+    }
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/home");
+    const formData = new FormData(e.currentTarget);
+    const otpValues = formData.getAll("otp[]").join(""); // Gabungkan nilai-nilai OTP
+
+    if (otpValues == "12345") {
+      setUser({
+        password_confirmation: user.password,
+      });
+      if (hasEmptyValue(user)) {
+        alert("Harap isi semua field dengan teliti");
+      } else {
+        registerData(user);
+      }
+    } else {
+      alert("otp yang anda masukan salah");
+    }
   };
   return (
     <main>
