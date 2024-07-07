@@ -35,7 +35,9 @@ function VErifikasiDarurat() {
     if (response.ok) {
       router.replace("/login");
     } else {
-      alert("terjadi kesalahan");
+      const res = await response.json();
+
+      alert("terjadi kesalahan" + res);
     }
   };
 

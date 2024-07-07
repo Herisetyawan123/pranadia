@@ -52,7 +52,7 @@ function page() {
       const session = await getSession();
       try {
         const response = await fetch(
-          process.env.NEXT_PUBLIC_URL_API + "/bookings",
+          process.env.NEXT_PUBLIC_URL_API + "bookings",
           {
             method: "POST",
             headers: {

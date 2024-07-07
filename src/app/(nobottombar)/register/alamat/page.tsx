@@ -15,6 +15,7 @@ function AlamatDomisili() {
       provinsi: user.provinsi ? user.provinsi : "Jawa Barat",
       kabupaten: user.kabupaten ? user.kabupaten : "Sumedang",
       kelurahan: user.kelurahan ? user.kelurahan : "Situ",
+      kecamatan: user.kecamatan ? user.kecamatan : "Sumedang Utar",
     });
   }, []);
 

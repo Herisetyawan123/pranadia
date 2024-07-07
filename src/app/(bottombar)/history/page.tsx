@@ -12,15 +12,12 @@ function History() {
   const loadBooking = async () => {
     const session = await getSession();
     const token = session?.user.access_token;
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_URL_API + "/bookings",
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await fetch(process.env.NEXT_PUBLIC_URL_API + "bookings", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
     const res = await response.json();
     if (response.ok) {
       setHistory(() => res);
