@@ -30,6 +30,7 @@ function InputGroup({
         type={type}
         id={id}
         value={value}
+        name={name}
         className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
         placeholder={placeholder}
         disabled={disable}
