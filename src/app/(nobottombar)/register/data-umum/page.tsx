@@ -4,11 +4,19 @@ import ButtonPrimary from "@/components/button/btn-primary";
 import InputGroup from "@/components/input/input-group";
 import useUserStore from "@/store/use-user-store";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 
 function DataUmum() {
   const router = useRouter();
   const { user, setUser, resetUser } = useUserStore();
+
+  useEffect(() => {
+    setUser({
+      title_pasien: user.title_pasien ? user.title_pasien : "nn",
+      status_kawin: user.status_kawin ? user.status_kawin : "belum",
+      jenis_kelamin: user.jenis_kelamin ? user.jenis_kelamin : "Perempuan",
+    });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -16,6 +24,7 @@ function DataUmum() {
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(user);
     router.push("/register/alamat");
   };
   return (
@@ -32,7 +41,12 @@ function DataUmum() {
           <select
             name="title_pasien"
             id="title"
-            onChange={handleChange}
+            defaultValue={user.title_pasien}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                title_pasien: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="nn">Nn</option>
@@ -40,21 +54,33 @@ function DataUmum() {
           </select>
         </div>
         <InputGroup
-          name="name"
+          name="email"
           type="text"
-          label="Nama Lengkap (Sesuai Ktp)"
-          placeholder="Gia L ayura"
+          label="Email"
+          value={user.email}
+          placeholder="xxx@gmail.com"
           onChange={handleChange}
         />
-        <p className="text-[#7D7D7D] text-xs font-normal">
-          *akan ditampilkan pada hasil pemeriksaan
-        </p>
+        <InputGroup
+          name="password"
+          type="password"
+          label="Password"
+          value={user.password}
+          placeholder="Masukan Password"
+          onChange={handleChange}
+        />
+
         <div className="flex flex-col w-full gap-2">
           <label htmlFor="status">Status</label>
           <select
             name="status_kawin"
             id="status"
-            onChange={handleChange}
+            defaultValue={user.status_kawin}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                status_kawin: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="belum">Belum Kawin</option>
@@ -67,13 +93,19 @@ function DataUmum() {
           label="Tempat Lahir"
           placeholder="Sumedang"
           onChange={handleChange}
+          value={user.tempat_lahir}
         />
         <div className="flex flex-col w-full gap-2">
           <label htmlFor="gender">Jenis Kelamin</label>
           <select
             name="jenis_kelamin"
             id="gender"
-            onChange={handleChange}
+            defaultValue={user.status_kawin}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                jenis_kelamin: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="Perempuan">Perempuan</option>
@@ -86,6 +118,7 @@ function DataUmum() {
           label="Tanggal Lahir"
           placeholder="23 April 2023"
           onChange={handleChange}
+          value={user.tgl_lahir}
         />
         <ButtonPrimary label="Selanjutnya" />
       </form>

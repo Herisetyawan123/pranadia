@@ -4,11 +4,19 @@ import ButtonPrimary from "@/components/button/btn-primary";
 import InputGroup from "@/components/input/input-group";
 import useUserStore from "@/store/use-user-store";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 
 function AlamatDomisili() {
   const router = useRouter();
   const { user, setUser, resetUser } = useUserStore();
+
+  useEffect(() => {
+    setUser({
+      provinsi: user.provinsi ? user.provinsi : "Jawa Barat",
+      kabupaten: user.kabupaten ? user.kabupaten : "Sumedang",
+      kelurahan: user.kelurahan ? user.kelurahan : "Situ",
+    });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,13 +41,19 @@ function AlamatDomisili() {
           label="Alamat Sesuai Ktp"
           placeholder="Perum Putra Citra Lestari"
           onChange={handleChange}
+          value={user.alamat}
         />
         <div className="flex flex-col w-full gap-2">
           <label htmlFor="">Provinsi</label>
           <select
             name="provinsi"
             id="provinsi"
-            onChange={handleChange}
+            defaultValue={user.provinsi}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                provinsi: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="Jawa Barat">Jawa Barat</option>
@@ -53,7 +67,12 @@ function AlamatDomisili() {
           <select
             name="kabupaten"
             id="kabupaten"
-            onChange={handleChange}
+            defaultValue={user.kabupaten}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                kabupaten: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="Sumedang">Sumedang</option>
@@ -67,7 +86,12 @@ function AlamatDomisili() {
           <select
             name="kecamatan"
             id="kecamatan"
-            onChange={handleChange}
+            defaultValue={user.kecamatan}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                kecamatan: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="Sumedang Utara">Sumedang Utara</option>
@@ -81,7 +105,12 @@ function AlamatDomisili() {
           <select
             name="kelurahan"
             id="Kelurahan"
-            onChange={handleChange}
+            defaultValue={user.kelurahan}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setUser({
+                kelurahan: e.target.value,
+              });
+            }}
             className="outline-none rounded-full border px-4 p-2 focus:ring-1 focus:ring-red-500 "
           >
             <option value="Situ">Situ</option>

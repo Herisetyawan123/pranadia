@@ -34,6 +34,7 @@ function Register() {
           label="Nama Lengkap (Sesuai Ktp)"
           placeholder="Gia L ayura"
           onChange={handleChange}
+          value={user.name}
         />
         <InputGroup
           name="tgl_lahir"
@@ -41,6 +42,7 @@ function Register() {
           label="Tanggal Lahir"
           placeholder="23 April 2023"
           onChange={handleChange}
+          value={user.tgl_lahir}
         />
         <p className="text-[#7D7D7D] text-xs font-normal mb-10">
           *tanggal-bulan-tahun (10-10-2023)
