@@ -24,9 +24,9 @@ const authOptions: NextAuthOptions = {
           }),
         };
         try {
-          // console.log(options)
+          // console.log(process.env.NEXT_PUBLIC_URL_API + "login");
           const response = await fetch(
-            process.env.NEXT_PUBLIC_URL_API + "/login",
+            process.env.NEXT_PUBLIC_URL_API + "login",
             options
           );
 

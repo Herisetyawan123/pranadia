@@ -1,7 +1,7 @@
 "use client";
 import AppBarRegister from "@/components/appbar/register";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import Pranadia from "@/assets/prandia-logo.png";
 import Image from "next/legacy/image";
 import CountDown from "./(component)/count-down";
@@ -9,7 +9,13 @@ import useUserStore, { User } from "@/store/use-user-store";
 
 function VErifikasiDarurat() {
   const router = useRouter();
-  const { user, setUser } = useUserStore();
+  const { user, setUser, resetUser } = useUserStore();
+
+  useEffect(() => {
+    setUser({
+      password_confirmation: user.password,
+    });
+  }, []);
 
   const isEmptyValue = (value: any) => {
     return (
@@ -33,11 +39,12 @@ function VErifikasiDarurat() {
       body: JSON.stringify(user),
     });
     if (response.ok) {
+      resetUser();
       router.replace("/login");
     } else {
       const res = await response.json();
 
-      alert("terjadi kesalahan" + res);
+      alert("terjadi kesalahan" + Object.keys(res));
     }
   };
 
@@ -47,9 +54,6 @@ function VErifikasiDarurat() {
     const otpValues = formData.getAll("otp[]").join(""); // Gabungkan nilai-nilai OTP
 
     if (otpValues == "12345") {
-      setUser({
-        password_confirmation: user.password,
-      });
       if (hasEmptyValue(user)) {
         alert("Harap isi semua field dengan teliti");
       } else {
