@@ -106,7 +106,15 @@ function Page() {
               </div>
             </div>
             <div className="basis-[5%]">
-              <p className="px-2 py-1 bg-red-100 text-red-600 text-[10px] font-medium rounded-full    ">
+              <p
+                className={`px-2 py-1  ${
+                  history.status == "pending"
+                    ? "text-yellow-600 bg-yellow-100"
+                    : history.status == "done"
+                    ? "text-green-600 bg-green-100"
+                    : "text-red-600 bg-red-100"
+                } text-[10px] font-medium rounded-full`}
+              >
                 {history?.status}
               </p>
             </div>
