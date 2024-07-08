@@ -1,10 +1,69 @@
+"use client";
 import AppBarBack from "@/components/appbar/appbar";
 import CardDropdown from "@/components/card/card-dropdown";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nindya from "@/assets/dokter/nindya.png";
 import Image from "next/legacy/image";
+import { getSession } from "next-auth/react";
+import { useParams } from "next/navigation";
+import Loading from "@/app/loading";
+import docters from "@/constant/data/dokter";
+
+interface HistoryInterface {
+  id: number;
+  user_id: number;
+  layanan: string;
+  no_medrek: string;
+  tgl_booking: string;
+  dokter: string;
+  start_time: string;
+  end_time: string;
+  biaya_layanan: string;
+  biaya_admin: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
 
 function Page() {
+  const [history, setHistory] = useState<HistoryInterface | null>(null);
+  const params = useParams<{ id: string }>();
+  const [docter, setDocters] = useState<DokterInterface | null>(null);
+
+  const loadBooking = async () => {
+    const session = await getSession();
+    const token = session?.user.access_token;
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_URL_API + "bookings/" + params.id,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    const res = await response.json();
+    if (response.ok) {
+      setHistory(() => res);
+      getDocter(res["dokter"]);
+    }
+  };
+
+  const getDocter = (docter: string | undefined) => {
+    setDocters(
+      docters.filter((item) => item.name == docter).length == 0
+        ? null
+        : docters.filter((item) => item.name == docter)[0]
+    );
+  };
+
+  useEffect(() => {
+    loadBooking();
+  }, [docter]);
+
+  if (history == null) {
+    return <Loading />;
+  }
   return (
     <main className="pb-10">
       <AppBarBack menu="Detail History" />
@@ -13,13 +72,19 @@ function Page() {
           <div className="flex justify-between">
             <div className={`flex px-1 py-2 gap-2 items-center`}>
               <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src={Nindya} alt="Nindya" className="w-full h-full" />
+                {docter && (
+                  <Image
+                    src={docter.photo}
+                    alt={docter.name}
+                    width={50}
+                    height={50}
+                    className="w-full h-full"
+                  />
+                )}
               </div>
               <div className="flex flex-col">
-                <h4 className="text-xs font-bold">Tn. Hadi Akbar</h4>
-                <p className="text-xs font-normal text-[#505050]">
-                  Laki-laki 23 Tahun{" "}
-                </p>
+                <h4 className="text-xs font-bold">{history?.dokter}</h4>
+                <p className="text-xs font-normal text-[#505050]"></p>
               </div>
             </div>
             <h6 className="text-[#D41F13] text-xs mt-1">PRM012821</h6>
@@ -36,13 +101,13 @@ function Page() {
             <div className="flex basis-[95%] gap-2 items-center">
               <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-300"></div>
               <div className="space-y-1">
-                <p className="text-[10px]">22 April 2023</p>
-                <h2 className="font-bold text-xs">Poliklinik Penyakit Dalam</h2>
+                <p className="text-[10px]">{history?.tgl_booking}</p>
+                <h2 className="font-bold text-xs">{history.layanan}</h2>
               </div>
             </div>
             <div className="basis-[5%]">
               <p className="px-2 py-1 bg-red-100 text-red-600 text-[10px] font-medium rounded-full    ">
-                selesai
+                {history?.status}
               </p>
             </div>
           </div>
@@ -50,19 +115,19 @@ function Page() {
           <div className="grid grid-cols-2 grid-rows-2">
             <div className="py-3 px-2 border-t">
               <p className="text-sm text-[#767676]">Kode Booking</p>
-              <p className="text-sm">NP0112</p>
+              <p className="text-sm">{"NP0" + history?.id}</p>
             </div>
             <div className="py-3 px-2 border-t border-l">
               <p className="text-sm text-[#767676]">Tanggal Booking</p>
-              <p className="text-sm">22 April 2023</p>
+              <p className="text-sm">{history?.tgl_booking}</p>
             </div>
             <div className="py-3 px-2 border-t">
               <p className="text-sm text-[#767676]">No. Antrian</p>
-              <p className="text-sm">PD-001</p>
+              <p className="text-sm">{"PD-0" + history?.id}</p>
             </div>
             <div className="py-3 px-2 border-t border-l">
               <p className="text-sm text-[#767676]">Tanggal Antrian</p>
-              <p className="text-sm">23 April 2023</p>
+              <p className="text-sm">{history?.tgl_booking}</p>
             </div>
           </div>
         </div>
@@ -74,11 +139,21 @@ function Page() {
           }}
         >
           <div className="w-10 h-10 rounded-full overflow-hidden">
-            <Image src={Nindya} alt="Nindya" className="w-full h-full" />
+            {docter && (
+              <Image
+                src={docter.photo}
+                alt={docter.name}
+                width={50}
+                height={50}
+                className="w-full h-full"
+              />
+            )}
           </div>
           <div className="flex flex-col">
-            <h1 className="text-xs">Dr. Dinar Agustina L</h1>
-            <span className="text-[10px] text-red-600">Dokter Umum</span>
+            <h1 className="text-xs">{history.dokter}</h1>
+            <span className="text-[10px] text-red-600">
+              {docter?.specialist}
+            </span>
           </div>
         </div>
 
@@ -93,47 +168,27 @@ function Page() {
           </div>
           <div className="flex flex-col py-2 w-full border-b border-dashed">
             <div className="flex justify-between items-center w-full">
-              <h4 className="text-xs">Konsultasi</h4>
+              <h4 className="text-xs">Administrasi</h4>
               <p className="px-3 py-1 text-xs font-medium rounded-full">
-                Rp. 175.000
+                Rp. {history.biaya_admin}
               </p>
             </div>
           </div>
           <div className="flex flex-col py-2 w-full border-b border-dashed">
             <div className="flex justify-between items-center w-full">
-              <h4 className="text-xs">Lab</h4>
+              <h4 className="text-xs">Layanan</h4>
               <p className="px-3 py-1 text-xs font-medium rounded-full">
-                Rp. 175.000
+                Rp. {history.biaya_layanan}
               </p>
             </div>
           </div>
           <div className="flex flex-col py-2 w-full border-b border-dashed">
             <div className="flex justify-between items-center w-full">
-              <h4 className="text-xs">Obat</h4>
-              <p className="px-3 py-1 text-xs font-medium rounded-full">
-                Rp. 175.000
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col py-2 w-full border-b border-dashed">
-            <div className="flex justify-between items-center w-full">
-              <h4 className="text-xs font-bold">Sub Total</h4>
+              <h4 className="text-xs font-bold">Total</h4>
               <p className="px-3 py-1 text-xs font-bold rounded-full">
-                Rp. 35.000
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col py-2 w-full border-b border-solid">
-            <div className="flex justify-between items-center w-full">
-              <h4 className="text-xs font-bold">Discount</h4>
-              <p className="px-3 py-1 text-xs font-bold rounded-full">Rp. 0</p>
-            </div>
-          </div>
-          <div className="flex flex-col py-2 w-full">
-            <div className="flex justify-between items-center w-full">
-              <h4 className="text-xs font-bold">Discount</h4>
-              <p className="px-3 py-1 text-xs font-bold rounded-full">
-                Rp. 350.000
+                Rp.{" "}
+                {parseInt(history.biaya_admin) +
+                  parseInt(history.biaya_layanan)}
               </p>
             </div>
           </div>

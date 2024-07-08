@@ -19,7 +19,7 @@ function page() {
     []
   );
   const [error, setError] = useState<boolean>(false);
-  const { addPromise } = useCreatePromise();
+  const { promise, addPromise } = useCreatePromise();
 
   useEffect(() => {
     setDokters(
@@ -33,11 +33,14 @@ function page() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onClick();
+    console.log(promise);
+  };
+
+  const onClick = () => {
     if (formRef.current) {
       const formData = new FormData(formRef.current);
       const data = Object.fromEntries(formData.entries());
-      // console.log(formRef.current);
-      console.log("Form data:", data);
+
       if (
         data.name != undefined &&
         data.date != undefined &&
@@ -60,9 +63,6 @@ function page() {
         setError(true);
       }
     }
-  };
-
-  const onClick = () => {
     setOpen((prevState) => !prevState);
   };
 
@@ -162,21 +162,25 @@ function page() {
 
       <div className="h-10"></div>
       <Modal isOpen={open} onToggle={onClick} title="Data Anda Sudah benar?">
-        <div className="p-4 border rounded-2xl flex w-full justify-between items-center">
-          <div className="space-y-1">
-            <h1 className="font-semibold">dr Mulfi azmi, Sp. PD</h1>
-            <p className="text-xs text-gray-700">Spesialis Penyakit Dalam</p>
-          </div>
-          <div>
-            <div className="w-14 h-14 rounded-full overflow-hidden relative bg-gray-400">
-              <Image
-                src={"/dokter/nindya.png"}
-                layout="fill"
-                objectFit="cover"
-              />
+        {promise?.docter && (
+          <div className="p-4 border rounded-2xl flex w-full justify-between items-center">
+            <div className="space-y-1">
+              <h1 className="font-semibold text-sm">{promise.docter.name}</h1>
+              <p className="text-xs text-gray-700">
+                {promise.docter.specialist}
+              </p>
+            </div>
+            <div>
+              <div className="w-14 h-14 rounded-full overflow-hidden relative bg-gray-400">
+                <Image
+                  src={promise.docter.photo}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="flex justify-between mt-5">
           <div className="flex gap-2 items-center">
@@ -197,7 +201,7 @@ function page() {
             </svg>
             <div>
               <p className="text-xs text-gray-400">Pasien</p>
-              <h1 className="font-semibold text-sm">Gia L Ayura</h1>
+              <h1 className="font-semibold text-sm">{promise?.pasien}</h1>
             </div>
           </div>
           <div className="flex gap-2 items-center">
@@ -218,9 +222,9 @@ function page() {
             </svg>
             <div>
               <span className="text-red-500 font-medium text-xs">
-                10 Oktober 2023
+                {promise?.date}
               </span>
-              <p className="text-xs font-medium">09:00 - 13:00</p>
+              <p className="text-xs font-medium">{promise?.time}</p>
             </div>
           </div>
         </div>

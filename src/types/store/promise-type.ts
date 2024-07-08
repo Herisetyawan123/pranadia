@@ -2,7 +2,7 @@ type PromiseType = {
   pasien: string;
   poli: string;
   date: string;
-  docter: DokterInterface;
+  docter?: DokterInterface;
   time: string;
   layanan: string;
   administrasi: string;

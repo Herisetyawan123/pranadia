@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { addDays, startOfWeek } from "date-fns";
+import useCreatePromise from "@/store/use-create-promise";
 
 export function getWeekdays(from: number = 0, until: number = 31) {
   const start = startOfWeek(new Date(), { weekStartsOn: 1 }); // Start of the week on Monday
@@ -29,6 +30,8 @@ export function formatDate(date: Date) {
 function InputDate() {
   const weekdays = getWeekdays();
   const [select, setSelect] = useState<number>(0);
+  const { addPromise } = useCreatePromise();
+
   return (
     <div className="space-y-2">
       <label htmlFor="">Pilih Tanggal</label>

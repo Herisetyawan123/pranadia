@@ -7,8 +7,24 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
+interface HistoryInterface {
+  id: number;
+  user_id: number;
+  layanan: string;
+  no_medrek: string;
+  tgl_booking: string;
+  dokter: string;
+  start_time: string;
+  end_time: string;
+  biaya_layanan: string;
+  biaya_admin: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
 function History() {
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<HistoryInterface[]>([]);
   const loadBooking = async () => {
     const session = await getSession();
     const token = session?.user.access_token;

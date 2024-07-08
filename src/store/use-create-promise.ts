@@ -3,8 +3,17 @@ import CreatePromiseInterface from "@/types/interfaces/store/create-promise";
 import PromiseType from "@/types/store/promise-type";
 
 const useCreatePromise = create<CreatePromiseInterface>((set) => ({
-  promise: undefined,
-  addPromise: (newPromise: PromiseType) => set({ promise: newPromise }),
+  promise: {
+    pasien: "",
+    poli: "",
+    date: "",
+    docter: undefined,
+    time: "",
+    layanan: "",
+    administrasi: "",
+    total: 0,
+  },
+  addPromise: (newPromise) => set({ promise: newPromise }),
 }));
 
 export default useCreatePromise;
