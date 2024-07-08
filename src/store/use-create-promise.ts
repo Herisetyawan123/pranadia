@@ -7,7 +7,6 @@ const useCreatePromise = create<CreatePromiseInterface>((set) => ({
     pasien: "",
     poli: "",
     date: "",
-    docter: undefined,
     time: "",
     layanan: "",
     administrasi: "",

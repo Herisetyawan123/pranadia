@@ -33,7 +33,7 @@ function page() {
         layanan: promise?.poli,
         no_medrek: "123456",
         tgl_booking: "2024-07-01",
-        dokter: promise?.docter.name,
+        dokter: promise?.docter ? promise.docter.name : "",
         start_time: "2024-07-01 09:00:00",
         end_time: "2024-07-01 09:30:00",
         biaya_layanan: promise?.administrasi,
